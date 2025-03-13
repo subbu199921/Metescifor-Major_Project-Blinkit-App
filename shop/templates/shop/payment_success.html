@@ -1,0 +1,52 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+    <div class="payment-container animate__animated animate__fadeIn">
+    <h2 class="animate__animated animate__bounceIn" style =" text-align: center; margin-bottom: 20px;">🎉 Payment Successful! 🎉</h2>
+    <p class="animate__animated animate__fadeInUp" style =" text-align: center; margin-bottom: 20px;">🤗 Your payment has been processed successfully 🤗</p>
+    <p class="animate__animated animate__fadeInUp" style =" text-align: center; margin-bottom: 20px;"> Thanks for shoping 🤝 </p>
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{% url 'home' %}" class="home-btn animate__animated animate__fadeInUp" style="background-color: green; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block;">
+        🏠 Back to Home
+    </a>
+</div>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .payment-container {
+        text-align: center;
+        background-color: #ffebf1; /* Light pink background */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        margin: 50px auto;
+        max-width: 500px;
+    }
+
+    h2 {
+        color: #ff4081; /* Pink heading */
+        font-weight: bold;
+    }
+
+    p {
+        color: #d81b60; /* Dark pink text */
+    }
+
+    .home-btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        background-color: #ff4081; /* Pink button */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s ease-in-out;
+    }
+
+    .home-btn:hover {
+        background-color: #d81b60; /* Darker pink on hover */
+    }
+</style>
+{% endblock %}

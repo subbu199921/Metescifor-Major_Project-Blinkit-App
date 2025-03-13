@@ -1,0 +1,93 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<style>
+    .cart-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .cart-item:hover {
+        transform: scale(1.02);
+    }
+
+    .cart-img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-right: 15px;
+    }
+
+    .cart-details {
+        flex-grow: 1;
+    }
+
+    .remove-btn {
+        background: #ff4d4d;
+        color: white;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+
+    .remove-btn:hover {
+        background: #cc0000;
+    }
+
+    .order-btn {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        background: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .order-btn:hover {
+        background: #388E3C;
+    }
+</style>
+
+<h2 class="animate_animated animate_fadeIn">Your Shopping Cart 🛒</h2>
+
+{% if cart_items %}
+    <div class="cart-container">
+        {% for item in cart_items %}
+            <div class="cart-item animate_animated animate_fadeInUp">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-img">
+                <div class="cart-details">
+                    <h3>{{ item.product.name }}</h3>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <p>Price per item: ${{ item.product.price }}</p>
+                    <p><strong>Total: ${{ item.product.price|floatformat:2 }}</strong></p>
+                </div>
+                <a href="{% url 'remove_from_cart' item.id %}" class="remove-btn"> 😌 Remove</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+    <h3>Total Price: ${{ total_price|floatformat:2 }}</h3>
+    <a href="{% url 'place_order' %}" class="order-btn">✅ Place Order</a>
+    <a href="{% url 'home' %}" style="display: block; text-align: center; margin-top: 20px; background-color: #228B22; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+    🌿 Back to Categories</a>
+{% else %}
+    <p class="animate_animated animate_fadeIn">Your cart is empty. 😞</p>
+{% endif %}
+
+{% endblock %}

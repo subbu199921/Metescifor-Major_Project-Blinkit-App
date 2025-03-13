@@ -1,0 +1,158 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f0f8f0;
+        font-family: Arial, sans-serif;
+    }
+
+    h2, h3 {
+        text-align: center;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .categories {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 20px 0;
+        gap: 10px;
+    }
+
+    .category-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .category-button:hover {
+        background-color: #388E3C;
+        transform: scale(1.05);
+    }
+
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .product {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 15px;
+        width: 240px;
+        text-align: center;
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product:hover {
+        transform: scale(1.05);
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .product img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+        display: inline-block;
+        width: 100%;
+        margin-top: 8px;
+        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+        border: none;
+        text-transform: uppercase;
+    }
+
+    .button:hover {
+        background: linear-gradient(45deg, #2E7D32, #66BB6A);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .button:active {
+        transform: scale(0.95);
+        box-shadow: none;
+    }
+
+    .animate_fadeIn {
+        animation: fadeIn 1s;
+    }
+
+    .animate_fadeInUp {
+        animation: fadeInUp 1s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<h2 class="animate_fadeIn">Welcome to 🌿 Blinkit 🌿 </h2>
+<h2 class="animate_fadeIn">🥰 Hello! Find everything you need, at Blinkit 🥰</h2>
+
+{% if user.is_authenticated %}
+    <div class="categories">
+        {% for category in categories %}
+            <a href="{% url 'category_products' category.id %}" class="category-button animate_fadeInUp">
+                {{ category.name }}
+            </a>
+        {% endfor %}
+    </div>
+
+    {% if selected_category %}
+        <h3 class="animate_fadeIn">{{ selected_category.name }} </h3>
+        <div class="products">
+            {% for product in products %}
+                <div class="product animate_fadeInUp">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <h4>{{ product.name }}</h4>
+                    <p>{{ product.description }}</p>
+                    <p><strong>Price: ${{ product.price }}</strong></p>
+
+                    <button onclick="location.href='{% url 'product_detail' product.id %}'" class="button">
+                        🔍 View Details
+                    </button>
+
+                    <button onclick="location.href='{% url 'add_to_cart' product.id %}'" class="button">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="animate_fadeIn" style="text-align: center; font-size: 18px; font-weight: bold;">🗃️ Select a category to view products.</p>
+    {% endif %}
+{% else %}
+    <p class="animate_fadeIn" style="text-align: center; font-size: 18px; font-weight: bold;">Please login to view products 👆.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h2 class="animate__animated animate__fadeIn" style="color: #1B5E20; font-size: 28px; text-align: center; margin-bottom: 20px;">
+    🔑 Login to Your Account
+</h2>
+
+<form method="post" class="animate__animated animate__fadeInUp"
+      style="background: linear-gradient(to right, #A5D6A7, #4CAF50);
+             padding: 25px; border-radius: 12px;
+             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+             max-width: 400px; margin: auto;">
+    {% csrf_token %}
+
+    <div style="color: #fff; font-size: 16px; font-weight: bold;">
+        {{ form.as_p }}
+    </div>
+
+    <!-- Animated Login Button -->
+    <button type="submit" class="btn-login">
+        🚀 Login
+    </button>
+
+</form>
+
+<p class="animate__animated animate__fadeInUp"
+   style="margin-top: 20px; font-size: 16px; text-align: center; color: #1B5E20;">
+    👨🏻‍💼 Don't have an account?
+    <a href="{% url 'register' %}"
+       style="color: #0D47A1; font-weight: bold; text-decoration: none;">
+       Sign up now! 📝
+    </a>
+</p>
+
+<!-- CSS for Animations -->
+<style>
+    /* Animated Login Button */
+    .btn-login {
+        background-color: #228B22;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        display: block;
+        margin: 10px auto;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Hover and Click Effects */
+    .btn-login:hover {
+        background-color: #1B5E20;
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-login:active {
+        transform: scale(0.95);
+    }
+</style>
+
+{% endblock %}

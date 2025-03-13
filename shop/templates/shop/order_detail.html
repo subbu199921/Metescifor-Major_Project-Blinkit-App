@@ -1,0 +1,81 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="order-container">
+    <h2 class="animate_animated animate_fadeIn">Order Details</h2>
+
+    <div class="order-info animate_animated animate_fadeInUp">
+        <p><strong>Order ID:</strong> {{ order.id }}</p>
+        <p><strong>Total Price:</strong> ₹{{ order.total_price }}</p>
+    </div>
+
+    <h3 class="animate_animated animate_fadeInUp">Ordered Items:</h3>
+
+    <div class="order-items">
+        {% for item in order_items %}
+            <div class="order-item animate_animated animate_fadeInUp">
+                <h4>{{ item.product.name }}</h4>
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="150">
+                <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+                <p><strong>Price:</strong> ₹{{ item.product.price }}</p>
+                <p><strong>Total:</strong> ₹{{ item.quantity|floatformat:2 }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Razorpay Payment Form -->
+    <form method="POST" action="{% url 'payment_success' %}">
+        {% csrf_token %}
+        <input type="hidden" name="order_id" value="{{ order.id }}">
+        <button type="submit" class="pay-button animate_animated animate_fadeInUp">
+            Pay Now
+        </button>
+    </form>
+
+    <!-- Back to Home Button -->
+    <a href="{% url 'home' %}" class="home-button animate_animated animate_fadeInUp">
+        🏠 Back to Home
+    </a>
+</div>
+
+<style>
+    .order-container {
+        text-align: center;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background: linear-gradient(135deg, #f8f4e3, #e0c3fc);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .order-info, .order-items {
+        margin-bottom: 20px;
+    }
+
+    .order-item {
+        background-color: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+    }
+
+    .pay-button, .home-button {
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 10px;
+        transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .pay-button:hover, .home-button:hover {
+        background-color: darkgreen;
+        transform: scale(1.05);
+    }
+</style>
+
+{% endblock %}

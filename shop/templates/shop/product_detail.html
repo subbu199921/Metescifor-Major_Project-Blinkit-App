@@ -1,0 +1,105 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<style>
+    /* General Styling */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff; /* Light background */
+        color: #333; /* Dark text */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+        margin: 0;
+    }
+
+    h2 {
+        color: #228B22; /* Leaf green */
+        text-align: center;
+    }
+
+    /* Product Detail Container */
+    .product-detail {
+        background-color: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        text-align: center;
+    }
+
+    .product-detail img {
+        border-radius: 8px;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .product-detail .price {
+        font-size: 20px;
+        font-weight: bold;
+        color: #228B22;
+    }
+
+    .actions {
+        margin-top: 20px;
+    }
+
+    .actions a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #228B22;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .actions a:hover {
+        background-color: #1E7A1E;
+    }
+
+    /* Centered Back to Categories Button */
+    .back-to-categories {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .back-to-categories a {
+        background-color: #228B22;
+        color: white;
+        padding: 15px 30px;
+        font-size: 18px;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+    }
+
+    .back-to-categories a:hover {
+        background-color: #1E7A1E;
+    }
+</style>
+
+<h2 class="animate__animated animate__fadeIn">{{ product.name }}</h2>
+<div class="product-detail animate__animated animate__fadeInUp">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    <p>{{ product.description }}</p>
+    <p class="price">Price: ${{ product.price }}</p>
+    <div class="actions">
+        <a href="{% url 'add_to_cart' product.id %}">🛒 Add to Cart</a>
+    </div>
+</div>
+
+<!-- Centered Back to Categories Button -->
+<div class="back-to-categories">
+    <a href="{% url 'home' %}" class="animate__animated animate__fadeInUp">🌿 Back to Categories</a>
+</div>
+
+{% endblock %}

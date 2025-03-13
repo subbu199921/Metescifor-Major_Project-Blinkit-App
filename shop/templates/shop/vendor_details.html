@@ -1,0 +1,81 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h2 class="animate__animated animate__fadeIn">👨🏻‍💼 Vendor Details</h2>
+
+{% if vendors %}
+    <div class="vendors">
+        {% for vendor in vendors %}
+            <div class="vendor animate__animated animate__fadeInUp vendor-card">
+                <h3>{{ vendor.name }}</h3>
+                <p class="vendor-detail">📞 Contact: {{ vendor.contact_number }}</p>
+                <p class="vendor-detail">📍 Address: {{ vendor.address }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="animate__animated animate__fadeIn">No vendors found.</p>
+{% endif %}
+
+<a href="{% url 'home' %}" class="animate__animated animate__fadeIn button">🏠 Back to Home</a>
+
+<style>
+    /* Vendor Cards Container */
+    .vendors {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    /* Vendor Cards */
+    .vendor-card {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Gradient background */
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px;
+        width: 250px; /* Slightly wider */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        text-align: center;
+    }
+
+    /* Hover Effect */
+    .vendor-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Vendor Text Styling */
+    .vendor-card h3 {
+        color: #ffffff; /* White text for the vendor name */
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .vendor-detail {
+        color: #333; /* Dark text for details */
+        font-weight: bold;
+    }
+
+    /* Back to Home Button */
+    .button {
+        display: inline-block;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #28a745, #1e7e34); /* Green Gradient */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        transition: background 0.3s ease, transform 0.2s;
+        font-weight: bold;
+    }
+
+    /* Button Hover Effect */
+    .button:hover {
+        background: linear-gradient(135deg, #218838, #19692c);
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
