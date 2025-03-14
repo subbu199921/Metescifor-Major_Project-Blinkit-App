@@ -62,12 +62,10 @@
         background-color: #1E7A1E;
     }
 
-    /* Centered Back to Categories Button */
+    /* Back to Categories Button */
     .back-to-categories {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        margin-top: 20px; /* Adds space between Add to Cart and Back to Categories button */
+        text-align: center; /* Center the button horizontally */
     }
 
     .back-to-categories a {
@@ -91,15 +89,16 @@
 <div class="product-detail animate__animated animate__fadeInUp">
     <img src="{{ product.image.url }}" alt="{{ product.name }}">
     <p>{{ product.description }}</p>
-    <p class="price">Price: ${{ product.price }}</p>
+    <p class="price">Price: ₹ {{ product.price }}</p>
+
     <div class="actions">
         <a href="{% url 'add_to_cart' product.id %}">🛒 Add to Cart</a>
     </div>
-</div>
 
-<!-- Centered Back to Categories Button -->
-<div class="back-to-categories">
-    <a href="{% url 'home' %}" class="animate__animated animate__fadeInUp">🌿 Back to Categories</a>
+    <!-- Back to Categories Button placed below the Add to Cart button -->
+    <div class="back-to-categories">
+        <a href="{% url 'home' %}" class="animate__animated animate__fadeInUp">🌿 Back to Categories</a>
+    </div>
 </div>
 
 {% endblock %}

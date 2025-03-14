@@ -5,9 +5,9 @@ from .views import user_home
 urlpatterns = [
     path('', views.product_list, name='home'),
     path('vendor/register/', views.vendor_register, name='vendor_register'),
-    path('vendor/details/', views.vendor_details, name='vendor_details'),  # Vendor details page
-    path('category/<int:category_id>/', views.category_products, name='category_products'),  # Category products
-    path('product/<int:product_id>/', views.product_detail, name='product_detail'),  # Product details
+    path('vendor/details/', views.vendor_details, name='vendor_details'),
+    path('category/<int:category_id>/', views.category_products, name='category_products'),
+    path('product/<int:product_id>/', views.product_detail, name='product_detail'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),

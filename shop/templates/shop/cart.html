@@ -73,8 +73,8 @@
                 <div class="cart-details">
                     <h3>{{ item.product.name }}</h3>
                     <p>Quantity: {{ item.quantity }}</p>
-                    <p>Price per item: ${{ item.product.price }}</p>
-                    <p><strong>Total: ${{ item.product.price|floatformat:2 }}</strong></p>
+                    <p>Price per item: ₹{{ item.product.price }}</p>
+                    <p><strong>Total: ₹{{ item.product.price|floatformat:2 }}</strong></p>
                 </div>
                 <a href="{% url 'remove_from_cart' item.id %}" class="remove-btn"> 😌 Remove</a>
             </div>
@@ -82,7 +82,7 @@
     </div>
 
     <hr>
-    <h3>Total Price: ${{ total_price|floatformat:2 }}</h3>
+    <h3>Total Price: ₹{{ item.product.price|floatformat:2 }}</h3>
     <a href="{% url 'place_order' %}" class="order-btn">✅ Place Order</a>
     <a href="{% url 'home' %}" style="display: block; text-align: center; margin-top: 20px; background-color: #228B22; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
     🌿 Back to Categories</a>

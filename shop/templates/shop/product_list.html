@@ -136,7 +136,7 @@
                     <img src="{{ product.image.url }}" alt="{{ product.name }}">
                     <h4>{{ product.name }}</h4>
                     <p>{{ product.description }}</p>
-                    <p><strong>Price: ${{ product.price }}</strong></p>
+                    <p><strong>Price: ₹{{ product.price }}</strong></p>
 
                     <button onclick="location.href='{% url 'product_detail' product.id %}'" class="button">
                         🔍 View Details
