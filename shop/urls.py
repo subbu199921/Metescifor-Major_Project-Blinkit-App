@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from .views import user_home
+from . import payment
 
 urlpatterns = [
     path('', views.product_list, name='home'),
@@ -17,5 +18,7 @@ urlpatterns = [
     path('place_order/', views.place_order, name='place_order'),
     path('order/<int:order_id>/', views.order_detail, name='order_detail'),
     path('user-home/', user_home, name='user_home'),
+    path('order/<int:order_id>/payment/', payment.payment_view, name='payment'),
+    path('order/<int:order_id>/payment/verification/', views.payment_verification, name='payment_verification'),
     path('payment/success/', views.payment_success, name='payment_success'),
 ]

@@ -1,36 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Your Payment</title>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: linear-gradient(135deg, #ffe6f7, #fdd2e8); /* Pink gradient background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .payment-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h2 {
+            color: #ff4081; /* Pink heading */
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        p {
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        #pay-btn {
+            background-color: #ff4081; /* Pink button */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        #pay-btn:hover {
+            background-color: #d81b60; /* Darker pink on hover */
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Complete Your Payment</h2>
-    <p>Order Total: ₹{{ order.total_price }}</p>
+    <div class="payment-container animate__animated animate__fadeIn">
+        <h2>Complete Your Payment</h2>
+        <p>Order Total: ₹{{ order.total_price }}</p>
 
-    <button id="pay-btn"> 🤑 Pay Now</button>
+        <button id="pay-btn"> 🤑 Pay Now</button>
 
-    <script>
-        var options = {
-            "key": "{{ razorpay_key_id }}",
-            "amount": "{{ order.total_price|floatformat:2 }}00",
-            "currency": "INR",
-            "name": "Your Store",
-            "description": "Purchase Order",
-            "order_id": "{{ razorpay_order_id }}",
-            "callback_url": "{% url 'payment_success' order.id %}",
-            "prefill": {
-                "name": "{{ request.user.username }}",
-                "email": "{{ request.user.email }}"
-            },
-            "theme": { "color": "#3399cc" }
-        };
+        <script>
+            var options = {
+                "key": "{{ razorpay_key_id }}",
+                "amount": "{{ order.total_price|floatformat:2 }}00",
+                "currency": "INR",
+                "name": "Your Store",
+                "description": "Purchase Order",
+                "order_id": "{{ razorpay_order_id }}",
+                "callback_url": "{% url 'payment_verification' order.id %}",
+                "prefill": {
+                    "name": "{{ request.user.username }}",
+                    "email": "{{ request.user.email }}"
+                },
+                "theme": { "color": "#3399cc" }
+            };
 
-        var rzp = new Razorpay(options);
-        document.getElementById("pay-btn").onclick = function (e) {
-            rzp.open();
-            e.preventDefault();
-        };
-    </script>
+            var rzp = new Razorpay(options);
+            document.getElementById("pay-btn").onclick = function (e) {
+                rzp.open();
+                e.preventDefault();
+            };
+        </script>
+    </div>
 </body>
 </html>

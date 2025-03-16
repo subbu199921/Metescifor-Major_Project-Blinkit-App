@@ -23,16 +23,13 @@
         {% endfor %}
     </div>
 
-    <!-- Razorpay Payment Form -->
-    <form method="POST" action="{% url 'payment_success' %}">
+    <form method="POST" action="{% url 'payment' order.id %}">
         {% csrf_token %}
-        <input type="hidden" name="order_id" value="{{ order.id }}">
         <button type="submit" class="pay-button animate_animated animate_fadeInUp">
             Pay Now
         </button>
     </form>
 
-    <!-- Back to Home Button -->
     <a href="{% url 'home' %}" class="home-button animate_animated animate_fadeInUp">
         🏠 Back to Home
     </a>
