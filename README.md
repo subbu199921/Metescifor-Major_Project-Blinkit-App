@@ -1,6 +1,6 @@
 # Blinkit App Inspired by E-commerce Platform
 
-Website Link :   https://subhashba.pythonanywhere.com/
+Website Link :   https://subbu23.pythonanywhere.com/
 
 ## Overview
 **Blinkit** is a Django-based e-commerce application that enables seamless online shopping. It includes user authentication, vendor registration, product catalog management, shopping cart functionality, order placement, and Razorpay payment integration.
